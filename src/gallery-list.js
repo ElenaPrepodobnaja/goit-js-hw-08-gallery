@@ -2,6 +2,13 @@ import images from './gallery-items.js';
 
 const list = document.querySelector('.js-gallery');
 const galleryList = createListImages(images);
+
+const modalWindow = document.querySelector('.lightbox');
+const modalImageEl = document.querySelector('.lightbox__image');
+
+const closeModalBtn = document.querySelector('.lightbox__button');
+const backdropEl = document.querySelector('.lightbox__overlay');
+
 list.insertAdjacentHTML('beforeend', galleryList);
 function createListImages(images) {
     return images
@@ -25,8 +32,6 @@ function createListImages(images) {
 };
 
 list.addEventListener('click', onImageLinkClick);
-const modalWindow = document.querySelector('.lightbox');
-const modalImageEl = document.querySelector('.lightbox__image');
 
 function onImageLinkClick(event) {
   
@@ -39,19 +44,16 @@ function onImageLinkClick(event) {
   modalImageEl.src = imgFullUrl;
   modalImageEl.alt = altTextFromImg;
   modalWindow.classList.add('is-open');
-  modalImageEl.classList.add('appear');
-
+  
   window.addEventListener('keydown', arrowImagesSwitch);
+  
 }
 
-
-const closeModalBtn = document.querySelector('.lightbox__button');
 
 closeModalBtn.addEventListener('click', onCloseBtnClick);
 
 window.addEventListener('keydown', onCloseBtnClick);
 
-const backdropEl = document.querySelector('.lightbox__overlay');
 backdropEl.addEventListener('click', onCloseBtnClick);
 function onCloseBtnClick(event) {
   if (event.code === 'Escape'|| event.currentTarget === event.target) {
