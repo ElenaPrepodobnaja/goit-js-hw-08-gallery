@@ -36,15 +36,15 @@ list.addEventListener('click', onImageLinkClick);
 function onImageLinkClick(event) {
   
   event.preventDefault();
- 
-  const imgFullUrl = event.target.dataset.source;
-  const altTextFromImg = event.target.alt;
-
-
-  modalImageEl.src = imgFullUrl;
-  modalImageEl.alt = altTextFromImg;
-  modalWindow.classList.add('is-open');
-  
+ if (event.target.nodeName !== 'IMG') {
+    return;
+  }
+  if (event.target.nodeName === "IMG") {
+    modalWindow.classList.add("is-open");
+    modalImageEl.src = event.target.getAttribute("data-source");
+    modalImageEl.alt = event.target.alt;
+  }
+    
   window.addEventListener('keydown', arrowImagesSwitch);
   
 }
